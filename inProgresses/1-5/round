@@ -1,0 +1,22 @@
+class gameRound:
+
+  def game(self, numPlayers, remainingDeck, hand1):
+    cardsRemaining = remainingDeck
+    discard = []
+    a = 0
+    victory = False
+    discard.append(cardsRemaining[a])
+    print("c", cardsRemaining)
+    while victory != True:
+      print(discard)
+      victory = True
+      x = input()
+      print(x)
+      if x == '1':
+        hand1.append(cardsRemaining[a])
+        cardsRemaining.remove(cardsRemaining[a])
+        a = a + 1
+      if x == '2':
+        hand1.append(discard[0])
+
+    print(hand1)
