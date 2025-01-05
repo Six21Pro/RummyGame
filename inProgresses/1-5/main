@@ -1,0 +1,59 @@
+from deck import deckOfCards
+from round import gameRound
+
+playDeck = deckOfCards()
+print(playDeck.deck52[0])  #for debug
+print(playDeck.deck52)
+playDeck.shuffle()
+print(playDeck.deck52)
+
+hand1 = []
+hand2 = []
+hand3 = []
+hand4 = []
+
+remainingDeck = []
+
+
+def deal(playDeck):
+  count1 = 0
+  count2 = 1
+  count3 = 2
+  count4 = 3
+  for i in range(0, 7):
+
+    hand1.append(playDeck.deck52[count1])
+    playDeck.deck52[count1] = 'XX'
+    count1 = count1 + 4
+
+    hand2.append(playDeck.deck52[count2])
+    playDeck.deck52[count2] = 'XX'
+    count2 = count2 + 4
+
+    hand3.append(playDeck.deck52[count3])
+    playDeck.deck52[count3] = 'XX'
+    count3 = count3 + 4
+
+    hand4.append(playDeck.deck52[count4])
+    playDeck.deck52[count4] = 'XX'
+    count4 = count4 + 4
+
+  remainingDeck = playDeck.deck52[28:52]
+  return remainingDeck
+
+
+remainingDeck = deal(playDeck)
+print(hand1)
+print()
+print(hand2)
+print()
+print(hand3)
+print()
+print(hand4)
+print()
+print(playDeck.deck52)
+print(remainingDeck)
+playDeck.reDeck()
+print(playDeck.deck52)
+game = gameRound()
+game.game(4, remainingDeck,hand1)
