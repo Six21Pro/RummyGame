@@ -1,0 +1,39 @@
+class gameRound:
+
+  def game(self, numPlayers, remainingDeck, hand1):
+    cardsRemaining = remainingDeck
+    toDiscard = '0'
+    h = ''
+    discard = []
+    a = 0
+    victory = False
+    discard.append(cardsRemaining[a])
+    cardsRemaining.remove(cardsRemaining[a])
+    print("c", cardsRemaining)
+    while victory != True:
+      print(discard)
+      print(cardsRemaining)
+      #victory = True
+      x = input()
+      print(x)
+      if x == '1':
+        hand1.append(cardsRemaining[0])
+        cardsRemaining.remove(cardsRemaining[0])
+        a = a + 1
+      if x == '2':
+        hand1.append(discard[0])  #currently grabbing top rather than last
+        discard.remove(discard[0])
+
+      print(hand1)
+      y = input("what to discard?")
+      if y in hand1:  #this is good
+        print('valid discard')
+        discard.append(y)
+        hand1.remove(y)
+      else:
+        print('choose a card from your hand')
+        while h not in hand1:
+          h = input()
+        print('valid discard')
+        discard.append(h)
+        hand1.remove(h)
