@@ -1,0 +1,49 @@
+class gameRound:
+
+  def game(self, numPlayers, remainingDeck, hand1,hand2,hand3,hand4):
+    cardsRemaining = remainingDeck
+    toDiscard = '0'
+    h = ''
+    arrayHands = [hand1,hand2,hand3,hand4]
+    discard = []
+    a = 0
+    b = 0
+    victory = False
+    discard.append(cardsRemaining[a])
+    cardsRemaining.remove(cardsRemaining[a])
+    #print("c", cardsRemaining) for debugging
+    while victory != True:
+      #print("arrayHands check", arrayHands[0])
+      currentHand = arrayHands[b]
+      print("current hand",b+1, "check", currentHand)
+      print(discard)
+      print(cardsRemaining)
+      #victory = True
+      x = input()
+      print(x)
+      if x == '1':
+        currentHand.append(cardsRemaining[0])
+        cardsRemaining.remove(cardsRemaining[0])
+        a = a + 1
+      if x == '2':
+        currentHand.append(discard[0])  #currently grabbing top rather than last
+        discard.remove(discard[0])
+
+      print(currentHand)
+      y = input("what to discard?")
+      if y in currentHand:  #this is good
+        print('valid discard')
+        discard.append(y)
+        currentHand.remove(y)
+      else:
+        print('choose a card from your hand')
+        while h not in currentHand:
+          h = input()
+        print('valid discard')
+        discard.append(h)
+        currentHand.remove(h)
+      b = b+1
+
+  def match(self, hand1):#in progress
+    if hand1[0]:
+      substring_start = hand1[0][:5]
