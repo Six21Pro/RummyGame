@@ -1,0 +1,149 @@
+class gameRound:
+
+  def game(self, numPlayers, remainingDeck, hand1, hand2, hand3, hand4):
+    cardsRemaining = remainingDeck
+    toDiscard = '0'
+    h = ''
+    arrayHands = [hand1, hand2, hand3, hand4]
+    discard = []
+
+    a = 0
+    b = 0
+    victory = False
+    discard.append(cardsRemaining[a])
+    cardsRemaining.remove(cardsRemaining[a])
+    #print("c", cardsRemaining) for debugging
+    while victory != True:
+      #print("arrayHands check", arrayHands[0])
+      currentHand = arrayHands[b]
+      print("current hand", b + 1, "check", currentHand)
+      print(discard)
+      print(cardsRemaining)
+      #victory = True
+      x = input()
+      print(x)
+      if x == '1':
+        currentHand.append(cardsRemaining[0])
+        cardsRemaining.remove(cardsRemaining[0])
+        a = a + 1
+      if x == '2':
+        currentHand.append(
+            discard[0])  #currently grabbing top rather than last
+        discard.remove(discard[0])
+
+      print(currentHand)
+      y = input("what to discard?")
+      if y in currentHand:  #this is good
+        print('valid discard')
+        discard.append(y)
+        currentHand.remove(y)
+      else:
+        print('choose a card from your hand')
+        while h not in currentHand:
+          h = input()
+        print('valid discard')
+        #print("h",h[:1])for debugging
+        discard.append(h)
+        currentHand.remove(h)
+      b = b + 1
+      if b == 4:
+        b = 0
+      self.match(currentHand)
+
+  def match(self, hand1):  #in progress
+
+    played = []
+    substring_start = hand1[0][:1]
+    print("check num", substring_start)
+    for i in range(0, len(hand1)):
+      findMatch = hand1[i][:1]
+      findMatch = gameRound.converter(findMatch)    
+      for j in range(0, len(hand1)):
+        find2 = hand1[j][:1]
+        find2 = gameRound.converter(find2)
+        if findMatch == find2 and i != j: #ifs like this is the problem for runs
+          #print("match found")
+          #print(hand1[i],hand1[j])
+          for k in range(0, len(hand1)):#this is the problem
+            find3 = hand1[k][:1]
+            find3 = gameRound.converter(find3)
+           
+            if int(find2) == int(findMatch)+1:
+              print("SMALL MATCH")
+            #if int(hand1[j][:1]) == int(findMatch)+1 and int(hand1[j][:1])+2 == int(hand1[k][:1])  or int(hand1[j][:1])-1 == int(findMatch) and int(hand1[j][:1])-2 == int(hand1[k][:1]) or int(findMatch)+1 == int(hand1[j][:1]) and int(findMatch)+2 == int(hand1[k][:1]) :
+              #print("one two sequence")
+            if findMatch == find3 and i != k and j != k:
+              
+              for l in range(0, len(hand1)):
+                find4 = hand1[l][:1]
+                find4 = gameRound.converter(find4)
+                if findMatch == find4 and i != l and j != l and k != l:
+                  print("match found")
+                  print(hand1[i], hand1[j], hand1[k], hand1[l])
+                  played.append(hand1[i])
+                  played.append(hand1[j])
+                  played.append(hand1[k])
+                  played.append(hand1[l])
+                  hand1.remove(hand1[i])
+                  hand1.remove(hand1[j])
+                  hand1.remove(hand1[k])
+                  hand1.remove(hand1[l])
+                  print("played", played)
+                  break  #not sure if this is good
+
+              print("match found")
+              print(hand1[i], hand1[j], hand1[k])
+              played.append(hand1[i])
+              played.append(hand1[j])
+              played.append(hand1[k])
+              hand1.remove(hand1[i])
+              hand1.remove(hand1[j-1])
+              hand1.remove(hand1[k-2])
+              print(hand1)
+              print("played", played)
+              
+            
+              break  #not sure if this is good
+              
+    for i in range(0, len(hand1)):#This for runs
+      findMatch = hand1[i][:1]   
+      findMatch = gameRound.converter(findMatch)
+      for j in range(0, len(hand1)):
+        print(findMatch)
+        print(hand1[j][:1])
+        find2 = hand1[j][:1]#use placeholders and a function to convert faces and 10s to integers
+        find2 = gameRound.converter(find2)
+        if int(findMatch)+1 == int(find2) and i != j:
+          #print("deteceted and increase")
+          for k in range(0, len(hand1)):
+
+
+
+            find3 = hand1[k][:1]#use placeholders and a function to convert faces and 10s to integers
+            find3 = gameRound.converter(find3)
+
+
+
+            
+            print(hand1[i])
+            print(hand1[j])
+            print(hand1[k])
+            if int(find2)+1 == int(find3) and j != k:
+              print("deteceted 1one, two, three")
+
+
+  @staticmethod#can do this apparently
+  def converter(toConvert):
+    if toConvert == '1':
+      toConvert = 10
+    if toConvert == 'J':
+      toConvert = 11
+    if toConvert == 'Q' :
+      toConvert = 12
+    if toConvert ==  'K' :
+      toConvert = 13
+    if toConvert == 'A':
+      toConvert = 14
+    return toConvert
+
+#I COULD CONVERT X'S TO COMPLETELY RANDOM INTS
